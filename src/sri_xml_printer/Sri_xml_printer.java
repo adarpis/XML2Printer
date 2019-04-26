@@ -190,7 +190,7 @@ public class Sri_xml_printer {
      */
     public static void main(String[] args) {
 	Sri_xml_printer test = new Sri_xml_printer();
-	//test.doPrint();
+	test.doPrint();
     }
 
 }
