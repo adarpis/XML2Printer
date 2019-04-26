@@ -20,6 +20,10 @@ package xml;
  *
  * @author aarpi <aarpi@t.org>
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2419b51a6c41502587ae1906c42af1a7f4fa4cf1
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -30,6 +34,7 @@ import java.io.File;
 
 public class XMLReader {
 
+<<<<<<< HEAD
     public static void main(String argv[]) {
 
 	try {
@@ -106,3 +111,49 @@ public class XMLReader {
     }
 
 }
+=======
+  public static void main(String argv[]) {
+
+    try {
+
+	File fXmlFile = new File("staff.xml");
+	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	Document doc = dBuilder.parse(fXmlFile);
+			
+	//optional, but recommended
+	//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+	doc.getDocumentElement().normalize();
+
+	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			
+	NodeList nList = doc.getElementsByTagName("staff");
+			
+	System.out.println("----------------------------");
+
+	for (int temp = 0; temp < nList.getLength(); temp++) {
+
+		Node nNode = nList.item(temp);
+				
+		System.out.println("\nCurrent Element :" + nNode.getNodeName());
+				
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+			Element eElement = (Element) nNode;
+
+			System.out.println("Staff id : " + eElement.getAttribute("id"));
+			System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
+			System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
+			System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
+			System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
+
+		}
+	}
+    } catch (Exception e) {
+	e.printStackTrace();
+    }
+  }
+
+}
+
+>>>>>>> 2419b51a6c41502587ae1906c42af1a7f4fa4cf1
