@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sri_xml_printer.Sri_xml_printer;
+import xml.XMLReader;
  
 public class WatchServiceDir {
  
@@ -81,6 +82,7 @@ public class WatchServiceDir {
      */
     void processEvents() {
 	Sri_xml_printer printer = new Sri_xml_printer();
+        XMLReader reader = new XMLReader();
         for (;;) {
  
             // wait for key to be signalled
@@ -110,6 +112,7 @@ public class WatchServiceDir {
                 System.out.format("%s: %s\n", event.kind().name(), child);
 		
 		if (kind == ENTRY_MODIFY) {
+                    reader.ReadXMLBill(child.toString());
 		    printer.doPrint();
 		}
  
@@ -139,7 +142,7 @@ public class WatchServiceDir {
     }
  
     public static void main(String[] args) throws IOException {
-        Path dir = Paths.get("C:\\Users\\dortega\\Desktop\\dev180920\\ePOS_Print_dev\\sri_printer\\dirs\\gen");
+        Path dir = Paths.get("C:\\Users\\adria\\Documents\\aarpi\\temp\\dirs\\gen");
         new WatchServiceDir(dir).processEvents();
     }
 }

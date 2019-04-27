@@ -42,37 +42,15 @@ public class Sri_xml_printer {
 
 		Graphics2D g2d = (Graphics2D) graphics;
 
-		double width = pageFormat.getImageableWidth();
+		//double width = pageFormat.getImageableWidth();
 
 		g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
-
-		////////// code by alqama//////////////
-		FontMetrics metrics = g2d.getFontMetrics(new Font("Arial", Font.BOLD, 7));
-		//    int idLength=metrics.stringWidth("000000");
-		//int idLength=metrics.stringWidth("00");
-		int idLength = metrics.stringWidth("000");
-		int amtLength = metrics.stringWidth("000000");
-		int qtyLength = metrics.stringWidth("00000");
-		int priceLength = metrics.stringWidth("000000");
-		int prodLength = (int) width - idLength - amtLength - qtyLength - priceLength - 17;
-
-		//    int idPosition=0;
-		//    int productPosition=idPosition + idLength + 2;
-		//    int pricePosition=productPosition + prodLength +10;
-		//    int qtyPosition=pricePosition + priceLength + 2;
-		//    int amtPosition=qtyPosition + qtyLength + 2;
-		int productPosition = 0;
-		int discountPosition = prodLength + 5;
-		int pricePosition = discountPosition + idLength + 10;
-		int qtyPosition = pricePosition + priceLength + 4;
-		int amtPosition = qtyPosition + qtyLength;
 
 		try {
 		    /*Draw Header*/
 		    int y = 20;
-		    int yShift = 10;
-		    int headerRectHeight = 15;
-		    int headerRectHeighta = 40;
+		    final int yShift = 10;
+		    final int headerRectHeight = 15;
 
 		    ///////////////// Product names Get ///////////
 		    String pn1a = "test 1";
@@ -126,10 +104,8 @@ public class Sri_xml_printer {
 		    g2d.drawString("    THANKS TO VISIT OUR RESTUARANT   ", 10, y);
 		    y += yShift;
 		    g2d.drawString("*************************************", 10, y);
-		    y += yShift;
+		    //y += yShift;
 
-//            g2d.setFont(new Font("Monospaced",Font.BOLD,10));
-//            g2d.drawString("Customer Shopping Invoice", 30,y);y+=yShift; 
 		} catch (Exception r) {
 		    r.printStackTrace();
 		}
@@ -179,7 +155,6 @@ public class Sri_xml_printer {
 	pj.setPrintable(new BillPrintable(), getPageFormat(pj));
 	try {
 	    pj.print();
-
 	} catch (PrinterException ex) {
 	    ex.printStackTrace();
 	}
