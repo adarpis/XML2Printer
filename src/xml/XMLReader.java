@@ -32,77 +32,116 @@ public class XMLReader {
 
     public static void main(String argv[]) {
 
-	try {
+        try {
 
-	    File fXmlFile = new File("C:\\Users\\dortega\\Desktop\\dev180920\\ePOS_Print_dev\\sri_printer\\dirs\\gen\\2604201901010428011500110010010000000071234567812.xml");
-	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	    Document doc = dBuilder.parse(fXmlFile);
+            File fXmlFile = new File("C:/Users/adria/Documents/aarpi/temp/dirs/gen/2704201901010428015100110010010000000041234567817.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
 
-	    //optional, but recommended
-	    //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-	    doc.getDocumentElement().normalize();
+            //optional, but recommended
+            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            doc.getDocumentElement().normalize();
 
-	    Element root = doc.getDocumentElement();
-	    System.out.println("Root element :" + root.getNodeName() + " " + root.getAttribute("id") + " " + root.getAttribute("version"));
+            Element root = doc.getDocumentElement();
+            System.out.println("Root element :" + root.getNodeName() + " " + root.getAttribute("id") + " " + root.getAttribute("version"));
 
-	    if (root.getAttribute("id").equals("comprobante") && root.getAttribute("version").equals("1.0.0")) {
-		System.out.println("----------------------------");
+            if (root.getAttribute("id").equals("comprobante") && root.getAttribute("version").equals("1.0.0")) {
+                System.out.println("----------------------------");
 
-		NodeList nList = doc.getElementsByTagName("infoTributaria");
+                NodeList nList = doc.getElementsByTagName("infoTributaria");
 
-		for (int temp = 0; temp < nList.getLength(); temp++) {
+                for (int temp = 0; temp < nList.getLength(); temp++) {
 
-		    Node nNode = nList.item(temp);
+                    Node nNode = nList.item(temp);
 
-		    System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                    System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-		    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-			Element eElement = (Element) nNode;
+                        Element eElement = (Element) nNode;
 
-			System.out.println("nombreComercial : " + eElement.getElementsByTagName("nombreComercial").item(0).getTextContent());
-			System.out.println("razonSocial : " + eElement.getElementsByTagName("razonSocial").item(0).getTextContent());
-			System.out.println("ruc : " + eElement.getElementsByTagName("ruc").item(0).getTextContent());
-			System.out.println("claveAcceso : " + eElement.getElementsByTagName("claveAcceso").item(0).getTextContent());
-			System.out.println("factura : " + eElement.getElementsByTagName("estab").item(0).getTextContent()
-				+ "-" + eElement.getElementsByTagName("ptoEmi").item(0).getTextContent()
-				+ "-" + eElement.getElementsByTagName("secuencial").item(0).getTextContent());
-			System.out.println("dirMatriz : " + eElement.getElementsByTagName("dirMatriz").item(0).getTextContent());
+                        System.out.println("nombreComercial : " + eElement.getElementsByTagName("nombreComercial").item(0).getTextContent());
+                        System.out.println("razonSocial : " + eElement.getElementsByTagName("razonSocial").item(0).getTextContent());
+                        System.out.println("ruc : " + eElement.getElementsByTagName("ruc").item(0).getTextContent());
+                        System.out.println("claveAcceso : " + eElement.getElementsByTagName("claveAcceso").item(0).getTextContent());
+                        System.out.println("factura : " + eElement.getElementsByTagName("estab").item(0).getTextContent()
+                                + "-" + eElement.getElementsByTagName("ptoEmi").item(0).getTextContent()
+                                + "-" + eElement.getElementsByTagName("secuencial").item(0).getTextContent());
+                        System.out.println("dirMatriz : " + eElement.getElementsByTagName("dirMatriz").item(0).getTextContent());
 
-		    }
-		}
-		
-		nList = doc.getElementsByTagName("detalle");
+                    }
+                }
 
-		for (int temp = 0; temp < nList.getLength(); temp++) {
+                nList = doc.getElementsByTagName("infoFactura");
 
-		    Node nNode = nList.item(temp);
+                for (int temp = 0; temp < nList.getLength(); temp++) {
 
-		    System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                    Node nNode = nList.item(temp);
 
-		    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-			Element eElement = (Element) nNode;
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-			//System.out.println("precioUnitario : " + eElement.getElementsByTagName("precioUnitario").item(0).getTextContent());
-			//System.out.println("razonSocial : " + eElement.getElementsByTagName("razonSocial").item(0).getTextContent());
-			//System.out.println("ruc : " + eElement.getElementsByTagName("ruc").item(0).getTextContent());
-			//System.out.println("claveAcceso : " + eElement.getElementsByTagName("claveAcceso").item(0).getTextContent());
-			System.out.println("item : " + eElement.getElementsByTagName("cantidad").item(0).getTextContent()
-				+ "\t" + eElement.getElementsByTagName("descripcion").item(0).getTextContent()
-				+ "\t" + eElement.getElementsByTagName("precioUnitario").item(0).getTextContent()
-				+ "\t" + eElement.getElementsByTagName("precioTotalSinImpuesto").item(0).getTextContent());
-			//System.out.println("dirMatriz : " + eElement.getElementsByTagName("dirMatriz").item(0).getTextContent());
+                        Element eElement = (Element) nNode;
 
-		    }
-		}
-		
-	    }
+                        System.out.println("fechaEmision : " + eElement.getElementsByTagName("fechaEmision").item(0).getTextContent());
+                        System.out.println("dirEstablecimiento : " + eElement.getElementsByTagName("dirEstablecimiento").item(0).getTextContent());
+                        System.out.println("razonSocialComprador : " + eElement.getElementsByTagName("razonSocialComprador").item(0).getTextContent());
+                        System.out.println("identificacionComprador : " + eElement.getElementsByTagName("identificacionComprador").item(0).getTextContent());
+                        if (!eElement.getElementsByTagName("tipoIdentificacionComprador").item(0).getTextContent().equals("07")) {
+                            System.out.println("direccionComprador : " + eElement.getElementsByTagName("direccionComprador").item(0).getTextContent());
+                        }
+                        System.out.println("totalSinImpuestos : " + eElement.getElementsByTagName("totalSinImpuestos").item(0).getTextContent());
+                        System.out.println("importeTotal : " + eElement.getElementsByTagName("importeTotal").item(0).getTextContent());
 
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+                    }
+                }
+
+                nList = doc.getElementsByTagName("detalle");
+
+                for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                    Node nNode = nList.item(temp);
+
+                    System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element eElement = (Element) nNode;
+
+                        System.out.println("item : " + eElement.getElementsByTagName("cantidad").item(0).getTextContent()
+                                + "\t" + eElement.getElementsByTagName("descripcion").item(0).getTextContent()
+                                + "\t" + eElement.getElementsByTagName("precioUnitario").item(0).getTextContent()
+                                + "\t" + eElement.getElementsByTagName("precioTotalSinImpuesto").item(0).getTextContent());
+
+                    }
+                }
+                
+                nList = doc.getElementsByTagName("totalImpuesto");
+
+                for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                    Node nNode = nList.item(temp);
+
+                    System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element eElement = (Element) nNode;
+
+                        System.out.println("baseImponible : " + eElement.getElementsByTagName("baseImponible").item(0).getTextContent());
+                        System.out.println("tarifa : " + eElement.getElementsByTagName("tarifa").item(0).getTextContent());
+                        System.out.println("valor : " + eElement.getElementsByTagName("valor").item(0).getTextContent());
+
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
