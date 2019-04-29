@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sri_xml_printer.Sri_xml_printer;
-import xml.XMLReader;
 
 public class WatchServiceDir {
 
@@ -112,7 +111,7 @@ public class WatchServiceDir {
                 // print out event
                 System.out.format("%s: %s\n", event.kind().name(), child);
 
-                if (kind == ENTRY_MODIFY) {
+                if (kind == ENTRY_MODIFY && !Files.isDirectory(child)) {
                     //reader.ReadXMLBill(child.toString());
                     printer.doPrint(child.toString());
                 }
