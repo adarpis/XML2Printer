@@ -60,7 +60,7 @@ public class Sri_xml_printer {
 
 		    Graphics2D g2d = (Graphics2D) graphics;
 
-		    //double width = pageFormat.getImageableWidth();
+		    final double width = pageFormat.getImageableWidth();
 		    g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
 
 		    try {
@@ -75,7 +75,7 @@ public class Sri_xml_printer {
 
 			NodeList nList = xmldoc.getElementsByTagName("infoTributaria");
 
-			g2d.drawString("-------------------------------------", 12, y);
+			g2d.drawString("----------------------------------", 0, y);
 			y += yShift;
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -89,26 +89,26 @@ public class Sri_xml_printer {
 				Element eElement = (Element) nNode;
 				String text = eElement.getElementsByTagName("nombreComercial").item(0).getTextContent();
 
-				g2d.drawString(text, (228 - metrics.stringWidth(text)) / 2, y);
+				g2d.drawString(text, (int) (width - metrics.stringWidth(text)) / 2, y);
 				y += yShift;
 				text = eElement.getElementsByTagName("razonSocial").item(0).getTextContent();
-				g2d.drawString(text, (228 - metrics.stringWidth(text)) / 2, y);
+				g2d.drawString(text, (int) (width - metrics.stringWidth(text)) / 2, y);
 				y += yShift;
 				text = "RUC: " + eElement.getElementsByTagName("ruc").item(0).getTextContent();
-				g2d.drawString(text, (228 - metrics.stringWidth(text)) / 2, y);
+				g2d.drawString(text, (int) (width - metrics.stringWidth(text)) / 2, y);
 				y += yShift;
 				text = eElement.getElementsByTagName("claveAcceso").item(0).getTextContent();
-				g2d.drawString("AUTH: " + text.substring(0,24), 12, y);
+				g2d.drawString("AUTH: " + text.substring(0,24), 0, y);
 				y += yShift;
-				g2d.drawString(text.substring(24,49), 45, y);
+				g2d.drawString(text.substring(24,49), 30, y);
 				y += yShift;
 				g2d.drawString("FACTURA # " + eElement.getElementsByTagName("estab").item(0).getTextContent()
 					+ "-" + eElement.getElementsByTagName("ptoEmi").item(0).getTextContent()
-					+ "-" + eElement.getElementsByTagName("secuencial").item(0).getTextContent(), 12, y);
+					+ "-" + eElement.getElementsByTagName("secuencial").item(0).getTextContent(), 0, y);
 				y += yShift;
-				g2d.drawString("MATRIZ: " + eElement.getElementsByTagName("dirMatriz").item(0).getTextContent(), 12, y);
+				g2d.drawString("MATRIZ: " + eElement.getElementsByTagName("dirMatriz").item(0).getTextContent(), 0, y);
 				y += yShift;
-				//g2d.drawString("-------------------------------------", 12, y);
+				//g2d.drawString("-------------------------------------", 0, y);
 				//y += headerRectHeight;
 
 				System.out.println("nombreComercial : " + eElement.getElementsByTagName("nombreComercial").item(0).getTextContent());
@@ -125,7 +125,7 @@ public class Sri_xml_printer {
 
 			nList = xmldoc.getElementsByTagName("infoFactura");
 
-			g2d.drawString("-------------------------------------", 12, y);
+			g2d.drawString("----------------------------------", 0, y);
 			y += yShift;
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -138,23 +138,23 @@ public class Sri_xml_printer {
 
 				Element eElement = (Element) nNode;
 
-				g2d.drawString("FECHA: " + eElement.getElementsByTagName("fechaEmision").item(0).getTextContent() + "        ", 12, y);
+				g2d.drawString("FECHA: " + eElement.getElementsByTagName("fechaEmision").item(0).getTextContent() + "        ", 0, y);
 				y += yShift;
-				g2d.drawString("D.EST: " + eElement.getElementsByTagName("dirEstablecimiento").item(0).getTextContent(), 12, y);
+				g2d.drawString("D.EST: " + eElement.getElementsByTagName("dirEstablecimiento").item(0).getTextContent(), 0, y);
 				y += yShift;
-				g2d.drawString("CLIENTE: " + eElement.getElementsByTagName("razonSocialComprador").item(0).getTextContent(), 12, y);
+				g2d.drawString("CLIENTE: " + eElement.getElementsByTagName("razonSocialComprador").item(0).getTextContent(), 0, y);
 				y += yShift;
-				g2d.drawString("ID: " + eElement.getElementsByTagName("identificacionComprador").item(0).getTextContent(), 12, y);
+				g2d.drawString("ID: " + eElement.getElementsByTagName("identificacionComprador").item(0).getTextContent(), 0, y);
 				y += yShift;
 				if (!eElement.getElementsByTagName("tipoIdentificacionComprador").item(0).getTextContent().equals("07")) {
-				    g2d.drawString("DIR: " + eElement.getElementsByTagName("direccionComprador").item(0).getTextContent(), 12, y);
+				    g2d.drawString("DIR: " + eElement.getElementsByTagName("direccionComprador").item(0).getTextContent(), 0, y);
 				    y += yShift;
 				}
-				g2d.drawString("SUBTOT: " + eElement.getElementsByTagName("totalSinImpuestos").item(0).getTextContent(), 12, y);
+				g2d.drawString("SUBTOT: " + eElement.getElementsByTagName("totalSinImpuestos").item(0).getTextContent(), 0, y);
 				y += yShift;
-				g2d.drawString("TOTAL: " + eElement.getElementsByTagName("importeTotal").item(0).getTextContent(), 12, y);
+				g2d.drawString("TOTAL: " + eElement.getElementsByTagName("importeTotal").item(0).getTextContent(), 0, y);
 				y += yShift;
-				g2d.drawString("-------------------------------------", 12, y);
+				g2d.drawString("----------------------------------", 0, y);
 				y += headerRectHeight;
 
 				System.out.println("fechaEmision : " + eElement.getElementsByTagName("fechaEmision").item(0).getTextContent());
@@ -172,11 +172,11 @@ public class Sri_xml_printer {
 
 			nList = xmldoc.getElementsByTagName("detalle");
 
-			g2d.drawString("-------------------------------------", 10, y);
+			g2d.drawString("----------------------------------", 1, y);
 			y += yShift;
-			g2d.drawString(" CANT. DESCR.           PREC.  TOTAL ", 10, y);
+			g2d.drawString(" CANT. DESCR.        PREC.  TOTAL ", 1, y);
 			y += yShift;
-			g2d.drawString("-------------------------------------", 10, y);
+			g2d.drawString("----------------------------------", 1, y);
 			y += yShift;
 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
@@ -191,12 +191,12 @@ public class Sri_xml_printer {
 				
 				g2d.drawString(eElement.getElementsByTagName("cantidad").item(0).getTextContent(), 15, y);
 				String text = eElement.getElementsByTagName("descripcion").item(0).getTextContent();
-				if (text.length() > 16) {
-				    text = text.substring(0, 16);
+				if (text.length() > 12) {
+				    text = text.substring(0, 12);
 				}
-				g2d.drawString(text, 46, y);
-				g2d.drawString(eElement.getElementsByTagName("precioUnitario").item(0).getTextContent(), 140, y);
-				g2d.drawString(eElement.getElementsByTagName("precioTotalSinImpuesto").item(0).getTextContent(), 177, y);
+				g2d.drawString(text, 41, y);
+				g2d.drawString(eElement.getElementsByTagName("precioUnitario").item(0).getTextContent(), 115, y);
+				g2d.drawString(eElement.getElementsByTagName("precioTotalSinImpuesto").item(0).getTextContent(), 152, y);
 				y += yShift;
 
 				System.out.println("item : " + eElement.getElementsByTagName("cantidad").item(0).getTextContent()
@@ -206,14 +206,14 @@ public class Sri_xml_printer {
 
 			    }
 			}
-			g2d.drawString("-------------------------------------", 10, y);
+			g2d.drawString("----------------------------------", 1, y);
 			y += yShift;
 
-			g2d.drawString("-------------------------------------", 10, y);
+			g2d.drawString("----------------------------------", 1, y);
 			y += yShift;
-			g2d.drawString(" BASE.           IMP.          TOTAL ", 10, y);
+			g2d.drawString(" BASE.           IMP.       TOTAL ", 1, y);
 			y += yShift;
-			g2d.drawString("-------------------------------------", 10, y);
+			g2d.drawString("----------------------------------", 1, y);
 			y += yShift;
 
 			nList = xmldoc.getElementsByTagName("totalImpuesto");
@@ -229,8 +229,8 @@ public class Sri_xml_printer {
 				Element eElement = (Element) nNode;
 
 				g2d.drawString(eElement.getElementsByTagName("baseImponible").item(0).getTextContent(), 15, y);
-				g2d.drawString(eElement.getElementsByTagName("tarifa").item(0).getTextContent(), 100, y);
-				g2d.drawString(eElement.getElementsByTagName("valor").item(0).getTextContent(), 177, y);
+				g2d.drawString(eElement.getElementsByTagName("tarifa").item(0).getTextContent(), 95, y);
+				g2d.drawString(eElement.getElementsByTagName("valor").item(0).getTextContent(), 152, y);
 				y += yShift;
 
 				System.out.println("baseImponible : " + eElement.getElementsByTagName("baseImponible").item(0).getTextContent());
@@ -240,13 +240,13 @@ public class Sri_xml_printer {
 			    }
 			}
 
-			g2d.drawString("*************************************", 10, y);
+			g2d.drawString("**********************************", 1, y);
 			y += yShift;
-			g2d.drawString("       GRACIAS POR SU VISITA         ", 10, y);
+			g2d.drawString("      GRACIAS POR SU VISITA       ", 1, y);
 			y += yShift;
-			g2d.drawString(" Impreso gracias a: www.imaytec.com  ", 10, y);
+			g2d.drawString("Impreso gracias a: www.imaytec.com", 1, y);
 			y += yShift;
-			g2d.drawString("*************************************", 10, y);
+			g2d.drawString("**********************************", 1, y);
 
 		    } catch (Exception r) {
 			r.printStackTrace();
@@ -277,12 +277,12 @@ public class Sri_xml_printer {
 	double middleHeight = 90.0;
 	double headerHeight = 4.0;
 	double footerHeight = 2.0;
-	double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
+	double width = convert_CM_To_PPI(7);      //printer know only point per inch.default value is 72ppi
 	double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
 	paper.setSize(width, height);
 	paper.setImageableArea(
 		0,
-		10,
+		4,
 		width,
 		height - convert_CM_To_PPI(1)
 	);   //define boarder size    after that print area width is about 180 points
