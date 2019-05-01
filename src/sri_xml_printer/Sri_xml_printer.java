@@ -277,7 +277,7 @@ public class Sri_xml_printer {
 	double middleHeight = 90.0;
 	double headerHeight = 4.0;
 	double footerHeight = 2.0;
-	double width = convert_CM_To_PPI(7);      //printer know only point per inch.default value is 72ppi
+	double width = convert_CM_To_PPI(8.5);      //printer know only point per inch.default value is 72ppi
 	double height = convert_CM_To_PPI(headerHeight + middleHeight + footerHeight);
 	paper.setSize(width, height);
 	paper.setImageableArea(
